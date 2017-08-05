@@ -28,6 +28,21 @@ var albumMarconi = {
     ]
 };
 
+var albumDaVinci = {
+    title: 'La Dolce Vita',
+    artist: 'Leonardo da Vinci',
+    label: 'Roma',
+    year: '1500',
+    albumArtUrl: 'assets/images/album_covers/17.png',
+    songs: [
+        {title: 'Il David', duration: '1.21'},
+        {title: 'Cappella Sistina', duration: '12.35'},
+        {title: 'Mona', duration: '6.22'},
+        {title: "L'ultima Cena", duration: '4.54'},
+        {title: 'Goliath', duration: '1.15'}
+    ]
+};
+
 var createSongRow = function(songNumber, songName, songLength){
     var template = '<tr class="album-view-song-item">'
     + '<td class="song-item-number">' + songNumber + '</td>'
@@ -62,3 +77,18 @@ var setCurrentAlbum = function(album){
 window.onload = function(){
     setCurrentAlbum(albumPicasso);
 };
+
+//if set to picasso, change to Marconi
+//if set to marconi, change to davinci
+//if set to davinci, set to picasso
+document.getElementsByClassName('album-cover-art')[0].addEventListener('click',
+function(){
+    var title = document.getElementsByClassName('album-view-title')[0];
+    if(title.firstChild.nodeValue==="The Colors"){
+        setCurrentAlbum(albumMarconi);
+    } else if(title.firstChild.nodeValue==="The Telephone"){
+        setCurrentAlbum(albumDaVinci);
+    } else if(title.firstChild.nodeValue==="La Dolce Vita"){
+        setCurrentAlbum(albumPicasso);
+    }
+});
