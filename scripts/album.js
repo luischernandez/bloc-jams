@@ -77,10 +77,20 @@ var setCurrentAlbum = function(album){
 
 //checkpoint13 here
 var findParentByClassName = function(element, targetClass){
+    console.log("target class is "+targetClass)
     if(element){
+        if(element.parentElement){
+            console.log("Parent found")
+        } else {
+            console.log("Parent not found")
+        }
         var currentParent = element.parentElement;
-        while(currentParent.className !== targetClass && currentParent.className !== null){
-            currentParent = currentParent.parentElement;
+            while(currentParent.className !== targetClass && currentParent.className !== null){
+                currentParent = currentParent.parentElement;
+                console.log(currentParent);
+            }
+        if (currentParent.className===null){
+            console.log("No parent found with that class name")
         }
         return currentParent;
     }
@@ -100,7 +110,7 @@ var getSongItem = function(element){
         //cases if I click some element inside the row,(think peers)
         case 'song-item-title':
         case 'song-item-duration':
-            return findParentByClassName(element, 'song-item-number').querySelector('.song-item-number');
+            return findParentByClassName(element, 'album-view-song-item').querySelector('.song-item-number');
         //cases if I click on a different number. should fetch that element
         case 'song-item-number':
             return element;
