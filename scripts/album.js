@@ -91,7 +91,6 @@ var nextSong = function() {
     }
     var lastSongNumber = currentlyPlayingSongNumber;
     setSong(songNumber);
-
     updatePlayerBarSong();
 
     var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
@@ -117,8 +116,8 @@ var previousSong = function() {
 
     $('.main-controls .play-pause').html(playerBarPauseButton);
 
-    var $previousSongNumberCell = $('.song-item-number[data-song-number"'+ currentlyPlayingSongNumber +'"]');
-    var $lastSongNumberCell = $('.song-item-number[data-song-number"'+lastSongNumber+ '"]');
+    var $previousSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+    var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
 
     $previousSongNumberCell.html(pauseButtonTemplate);
     $lastSongNumberCell.html(lastSongNumber);
