@@ -128,8 +128,8 @@ var previousSong = function() {
 //on new song number.
 //Replace all manual assignments.
 var setSong = function(songNumber){
-    currentlyPlayingSongNumber = parseInt(songNumber); //some new value but which one?
-    currentSongFromAlbum = currentAlbum.songs[songNumber-1]; //some new value but which one?
+    currentlyPlayingSongNumber = parseInt(songNumber); //some new value 
+    currentSongFromAlbum = currentAlbum.songs[songNumber-1]; //some new value
 };
 
 //make getSongNumberCell(), takes 1 argmt 'number', and returns the song
