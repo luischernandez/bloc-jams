@@ -31,7 +31,7 @@ var createSongRow = function(songNumber, songName, songLength){
                     currentSoundFile.pause();
                 }
             }
-        
+
 };
 
     var onHover = function(event){
@@ -132,6 +132,26 @@ var previousSong = function() {
     $lastSongNumberCell.html(lastSongNumber);
 };
 
+var togglePlayFromPlayerBar = function() {
+    if (currentSoundFile.isPaused()) {
+        //get the songnumber cell to change it into pause button when we click play
+        var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
+        currentlyPlayingCell.html(pauseButtonTemplate);
+        //change the bar to pause when we click play
+        $('.main-controls .play-pause').html(playerBarPauseButton);
+        //play the song
+        currentSoundFile.play();
+    } else {
+        //get the song number cell to change it to play when we click pause
+        var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
+        currentlyPlayingCell.html(playButtonTemplate);
+        //change the bar to show play button when we click pause
+        $('.main-controls .play-pause').html(playerBarPlayButton);
+        //pause the song
+        currentSoundFile.pause();
+    }
+}
+
 //create setSong() to take 1 argument 'songNumber', and assign
 // currentlyPlayingSongNumber and currentSongFromAlbum a new value based
 //on new song number.
@@ -185,12 +205,14 @@ var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
+var $playPauseButton = $('.main-controls .play-pause');
 
 //trigger the setCurrentAlbum function when the window loads
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
+    $playPauseButton.click(togglePlayFromPlayerBar);
 });
 
 //if set to picasso, change to Marconi
