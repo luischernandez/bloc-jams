@@ -90,7 +90,7 @@ var nextSong = function() {
         currentSongIndex = 0;
     }
     var lastSongNumber = currentlyPlayingSongNumber;
-    setSong(songNumber);
+    setSong(currentSongIndex+1);
     updatePlayerBarSong();
 
     var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
@@ -110,7 +110,7 @@ var previousSong = function() {
         currentSongIndex = currentAlbum.songs.length-1;
     }
     var lastSongNumber = currentlyPlayingSongNumber;
-    setSong(songNumber);
+    setSong(currentSongIndex+1);
 
     updatePlayerBarSong();
 
@@ -128,7 +128,7 @@ var previousSong = function() {
 //on new song number.
 //Replace all manual assignments.
 var setSong = function(songNumber){
-    currentlyPlayingSongNumber = parseInt(songNumber); //some new value 
+    currentlyPlayingSongNumber = parseInt(songNumber); //some new value
     currentSongFromAlbum = currentAlbum.songs[songNumber-1]; //some new value
 };
 
