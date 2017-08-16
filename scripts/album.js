@@ -3,7 +3,7 @@ var createSongRow = function(songNumber, songName, songLength){
       '<tr class="album-view-song-item">'
     + '<td class="song-item-number" data-song-number="' + songNumber + '">'+songNumber+'</td>'
     + '<td class="song-item-title">' + songName + '</td>'
-    + '<td class="song-item-duration">' + songLength + '</td>'
+    + '<td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
     + '</tr>';
 
     var $row = $(template);
@@ -95,6 +95,7 @@ var updateSeekBarWhileSongPlays = function() {
             var $seekBar = $('.seek-control .seek-bar');
 
             updateSeekPercentage($seekBar, seekBarFillRatio);
+            setCurrentTimeInPlayerBar(this.getTime());
         });
     }
 }
@@ -243,7 +244,7 @@ var setSong = function(songNumber){
     setVolume(currentVolume);
 };
 
-var seek = function() {
+var seek = function(time) {
     if(currentSoundFile){
         currentSoundFile.setTime(time);
     }
@@ -269,7 +270,31 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     $('.main-controls .play-pause').html(playerBarPauseButton);
+    setTotalTimeInPlayerBar(currentSongFromAlbum.duration);
 };
+
+//checkpoint 21 assignment below:
+var setCurrentTimeInPlayerBar = function(currentTime){
+    //set text of element with .current-time to the current total-time
+    $('.current-time').text(filterTimeCode(currentTime));
+    //add method to updateSeekBarWhileSongPlays()
+}
+
+var setTotalTimeInPlayerBar = function(totalTime){
+    //set text of element with .total-time class to the length of song
+    $('.total-time').text(filterTimeCode(totalTime));
+    //add the method to updatePlayerBarSong() so total time is set when song plays
+}
+
+var filterTimeCode = function(timeInSeconds){
+    //use the parseFloat() method
+    var minutes = Math.floor(parseFloat(timeInSeconds/60));
+    var seconds = Math.floor(timeInSeconds%60);
+    return minutes+":"+seconds;
+    //store variables for whole seconds and whole minutes using math.floor
+    //return the time in the format x:xx
+}
+
 
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"><span></a>';
